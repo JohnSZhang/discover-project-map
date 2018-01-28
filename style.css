@@ -18,5 +18,17 @@
 }
 
 .leaflet-popup-content-wrapper, .leaflet-popup-tip {
-    background: aliceblue; 
+    background: aliceblue;
+}
+
+.leaflet-popup-content > img {
+    display:block;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.leaflet-popup-content-wrapper .direction-modes {
+    text-align: center;
 }

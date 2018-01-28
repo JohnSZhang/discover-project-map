@@ -220,6 +220,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             m.bindPopup(popup_text);
+
         }
     }
 
@@ -235,6 +236,7 @@ document.addEventListener("DOMContentLoaded", function () {
         self_loc = e.latlng;
         if (!mapLoaded) {
             displayGalleryNearby(e.latlng);
+            L.tileLayer.provider('Stamen.Watercolor').addTo(map);
         }
 
         mapLoaded = true;
@@ -263,7 +265,7 @@ document.addEventListener("DOMContentLoaded", function () {
             var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom cursor');
 
             container.style.backgroundColor = 'white';
-            container.style.backgroundImage =   "url(https://png.pngtree.com/element_pic/00/16/07/2557961e461681d.jpg)";
+            container.style.backgroundImage =   "url(https://freeiconshop.com/wp-content/uploads/edd/location-marker-flat.png)";
             container.style.backgroundSize = "35px 35px";
             container.style.width = '35px';
             container.style.height = '35px';
@@ -276,13 +278,10 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
     map.addControl(new LocationControl());
-    L.tileLayer.provider('Stamen.Watercolor').addTo(map);
 
     //Set Initial Marker
     // map.locate({setView: true, maxZoom: 15, minZoom: 15});
     map.setView(initial_loc, 15);
-    // L.marker(initial_loc,
-        // {icon: myIcon}).addTo(map);
 
 });
 
