@@ -1,9 +1,11 @@
 var walk_source, bike_source, train_source, car_source, site_source;
 
 document.addEventListener("DOMContentLoaded", function () {
-    var map, current_position, radius, art_locations, myIcon, museumIcon, self_loc, locationControl, mapLoaded, popup_text, trasport_list;
+    var map, current_position, radius, art_locations, myIcon, museumIcon, self_loc, locationControl, mapLoaded, popup_text, trasport_list, initial_loc;
 
     mapLoaded = false;
+
+    initial_loc = { "lat" : 33.7916561, "lng" : -84.3982238 };
 
     myIcon = L.icon({
         iconUrl: "https://cdn1.iconfinder.com/data/icons/mix-color-3/502/Untitled-7-512.png",
@@ -201,10 +203,10 @@ document.addEventListener("DOMContentLoaded", function () {
             ];
 
             //add webpage
-            popup_text += '<a href="' + art.website + '" target="blank"><img src="' + site_source + '"/>' + art.name + '</a>';
+            popup_text += '<div class="art-name"><a href="' + art.website + '" target="blank"><img src="' + site_source + '"/>' + art.name + '</a></div>';
 
             //add image
-            popup_text +=  '<img width="150" class="popup-img" src="' + art.img_url + '" />';
+            popup_text +=  '<img width="200" class="popup-img" src="' + art.img_url + '" />';
 
             //add trasportations
             popup_text += '<div class="direction-modes">';
@@ -250,11 +252,11 @@ document.addEventListener("DOMContentLoaded", function () {
         map.locate({setView: true, maxZoom: 15, minZoom: 15});
     }
 
-    locate();
+    // locate();
 
     LocationControl =  L.Control.extend({
         options: {
-            position: 'topleft'
+            position: 'topright'
         },
 
         onAdd: function (map) {
@@ -262,9 +264,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
             container.style.backgroundColor = 'white';
             container.style.backgroundImage =   "url(https://png.pngtree.com/element_pic/00/16/07/2557961e461681d.jpg)";
-            container.style.backgroundSize = "27px 27px";
-            container.style.width = '27px';
-            container.style.height = '27px';
+            container.style.backgroundSize = "35px 35px";
+            container.style.width = '35px';
+            container.style.height = '35px';
 
             container.onclick = function () {
                 locate();
@@ -275,6 +277,13 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     map.addControl(new LocationControl());
     L.tileLayer.provider('Stamen.Watercolor').addTo(map);
+
+    //Set Initial Marker
+    // map.locate({setView: true, maxZoom: 15, minZoom: 15});
+    map.setView(initial_loc, 15);
+    // L.marker(initial_loc,
+        // {icon: myIcon}).addTo(map);
+
 });
 
 walk_source = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAURSURBVGhD7ZhbbNtUGIDDGOW+B0QlEAJpvPAE4iKGBIJpmtgmageKqLi8MKRJk0BsQ2Lsgabu2OjGmrZ0WWEN6+i0riVpnMRJ66Rd21CWpnbjpBelG6JI8MS0cXkYu2m0Pvx2fyd26o3xkMSV8km/lPj85/h8Oef4nNhWpkyZ0kP6qh6VI7Rb5umEzFPdcj/9AhYtH6DzT0BcJBGaaCFHqAWZt7+FKcsDGIERvURWhqf+kD1v3Ilp1oYwzAr49S+biSghR6vWYKr1gbVx1kxCCTlifwzTrA+MSIu5BH0KU5YH8sDLd8N66DNI8PSUPECvxpTlBcish9HZJvNV1cRbU4GXyxSNaGfrOrbjG3dPe9fw8faehMOZWs8wZAUWWx/+eOuqrsOeWcaZJnXOSTXcbWHt8wTjlO7HVOsy0HnoJZcrelET0EInQvY0jp7HdGsS7mivb2hOyHoBJVyuQaIfHSXcLV1PYjXrQGJrV44ca+LyO6vE/pYx0nJweMn1rw5868Hq1oD0vfKAcpa61v86aXNFsx2tb0qRo18HSEOzYBBQovZAmuyt95zDJkoPCDyrP378yb1L9rUkiPtQ+HfXwYHT+QJa7NwjkS0fjZJAW9vD2FRpgc1NMO7W1NzPvu2bGSZ2R11j+qqZhBLbHCLZvD1OOhrbDmNTpYOEqLvgmPGPTuIzbbd2NKXXmglosfWTcVXk8/qes2pjpUSOvvp8ToK+oj9yQGc/ze98LtILm3eMkf27u8mZEx9ck/lNq7BaaYDO79CJJPCyCkyrqLkEPAScycnTXe/L2boRaitWKw0wlbpzItSXeNlW4/XeCr/6BTMJJRyN6b2QH9TqYv1BOWpfh00UF7j5XK4juf/ezBfTT5sJaME0pTYpndaLZNuJUOPQLnyx3YLNFRY5uuE+mE7Z6aG8IcEiW+uRCefuZnOJusbJeaZVUNeE3E+9CR2f1YtoAW2n5HDVQ2qDhQR+tQ3Zm0Zow7lpaFD8a3JCJMNDSfKdTyKuIymiiTmc6RSmqSz+n7fboeM/6EUW26V2YlrhAJGPczekQ3hZZeikcHVGEok+NLHOE6kgpi1BeQkB7bIgsABiV4ryUoIMVD0DApfgpvOkn3oNL9u8Xu89odD3C/kiWpwaFY9i6nWRI9UPwh5VvGM+PP8rYS8xHDHCLFvN+QNkdEQwFZlOin9nJOkRTLcuIZbtDPlZEgoEiRAfN5WB8GG6NWFg4Yb8vnOqCATPBcmUmDATIVOSuBGrWY9gsPc5TUKLk3xffCYpXFoikxR/Am7HqtYCplVDvkjY59sI6+Kd6aQgm8g4sKq1CLG+GYMIy/5ICFF3aJCpXSIiiZenBMFaL+iCvb1PGSQgOJb9EIttihCMSpeJzHX3laLDezyVMBq/GERY3wVlT8EUlUwmUwHTaTxfZloSXsSU0gGdrYCOxw0SqgjbgCkG0ul0JYzMbwYZkNOmYMng/L5jJhJjiiCmLAHWyxaDyGLUYHHxgTWwK1+C87O/KlMNU0yJxWIrQWZWLwLf5yRJug1TikeQZe3Q8XmDCKyLQCDwOKbckKnUBK0XUSMpZh8ORYHjPKuVThskQEqRw5SbAjbKUaOIcD6TiRkeEAUFjiG1eRLKo3YXFt80k8nkGpONshqLCw/n733bIAELHov+NyDi0SQUqYwoFu99sPKohFFhONaXgJHYd6Mn1H9xJh6/F6aUW91fUuPv4eUyZcoUBJvtX6xZxiikflTrAAAAAElFTkSuQmCC";
