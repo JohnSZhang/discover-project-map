@@ -220,6 +220,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             m.bindPopup(popup_text);
+            m.on('click', function (e) {
+                map.setView(e.target.getLatLng());
+            });
 
         }
     }
