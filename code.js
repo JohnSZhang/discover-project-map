@@ -4,45 +4,45 @@ document.addEventListener("DOMContentLoaded", function () {
 
     myIcon = L.icon({
         iconUrl: "https://cdn1.iconfinder.com/data/icons/mix-color-3/502/Untitled-7-512.png",
-        iconSize: [30, 30],
-        iconAnchor: [22, 30],
-        popupAnchor: [-3, -40],
+        iconSize: [40, 40],
+        iconAnchor: [22, 40],
+        popupAnchor: [-3, -30],
         shadowSize: [68, 50],
         shadowAnchor: [22, 94]
     });
 
     museumIcon = L.icon({
         iconUrl: 'https://image.flaticon.com/icons/png/512/236/236981.png',
-        iconSize: [30, 30],
-        iconAnchor: [22, 30],
-        popupAnchor: [-3, -40],
+        iconSize: [40, 40],
+        iconAnchor: [22, 40],
+        popupAnchor: [-3, -30],
         shadowSize: [68, 50],
         shadowAnchor: [22, 94]
     });
 
     galleryIcon = L.icon({
         iconUrl: 'https://icon-icons.com/icons2/1261/PNG/512/1496676744-rounded-high-ultra-colour15-palette_84629.png',
-        iconSize: [30, 30],
-        iconAnchor: [22, 30],
-        popupAnchor: [-3, -40],
+        iconSize: [40, 40],
+        iconAnchor: [22, 40],
+        popupAnchor: [-3, -30],
         shadowSize: [68, 50],
         shadowAnchor: [22, 94]
     });
 
     statueIcon = L.icon({
         iconUrl: "https://www.shareicon.net/download/2016/08/18/810088_chile_512x512.png",
-        iconSize: [30, 30],
-        iconAnchor: [22, 30],
-        popupAnchor: [-3, -40],
+        iconSize: [40, 40],
+        iconAnchor: [22, 40],
+        popupAnchor: [-3, -30],
         shadowSize: [68, 50],
         shadowAnchor: [22, 94]
     });
 
     muralIcon = L.icon({
         iconUrl: "https://cdn0.iconfinder.com/data/icons/seo-internet-1/512/graffiti_paint_wall_spray_street_can-512.png",
-        iconSize: [30, 30],
-        iconAnchor: [22, 30],
-        popupAnchor: [-3, -40],
+        iconSize: [40, 40],
+        iconAnchor: [22, 40],
+        popupAnchor: [-3, -30],
         shadowSize: [68, 50],
         shadowAnchor: [22, 94]
     });
