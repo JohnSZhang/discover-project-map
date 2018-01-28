@@ -1,7 +1,8 @@
 
 document.addEventListener("DOMContentLoaded", function () {
-    var map, current_position, current_accuracy, radius, art_locations, myIcon, museumIcon, self_loc;
+    var map, current_position, radius, art_locations, myIcon, museumIcon, self_loc, locationControl, mapLoaded;
 
+    mapLoaded = false;
     myIcon = L.icon({
         iconUrl: "https://cdn1.iconfinder.com/data/icons/mix-color-3/502/Untitled-7-512.png",
         iconSize: [40, 40],
@@ -195,22 +196,24 @@ document.addEventListener("DOMContentLoaded", function () {
                 '<a href=' + art.website + ' target="_blank" >website</a>' + '</break> <a href="' +
                 'https://www.google.es/maps/dir/?api=1&origin=' + self_loc.lat + ',' + self_loc.lng + '&destination=' + art.loc.lat + ',' + art.loc.lng + '&travelmode=bicycling" target="_blank">directions</a>');
         }
-        console.log('working');
     }
 
 
     function onLocationFound(e) {
         if (current_position) {
             map.removeLayer(current_position);
-            map.removeLayer(current_accuracy);
         };
 
-        radius = e.accuracy / 2;
         current_position = L.marker(e.latlng,
             {icon: myIcon}).addTo(map);
 
         self_loc = e.latlng;
-        displayGalleryNearby(e.latlng);
+        if (!mapLoaded) {
+            displayGalleryNearby(e.latlng);
+        }
+
+        mapLoaded = true;
+        console.log('found location');
     }
 
     function onLocationError(e) {
@@ -226,5 +229,27 @@ document.addEventListener("DOMContentLoaded", function () {
 
     locate();
 
+    LocationControl =  L.Control.extend({
+        options: {
+            position: 'topleft'
+        },
+
+        onAdd: function (map) {
+            var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom cursor');
+
+            container.style.backgroundColor = 'white';
+            container.style.backgroundImage =   "url(https://png.pngtree.com/element_pic/00/16/07/2557961e461681d.jpg)";
+            container.style.backgroundSize = "27px 27px";
+            container.style.width = '27px';
+            container.style.height = '27px';
+
+            container.onclick = function () {
+                locate();
+            };
+
+            return container;
+        }
+    });
+    map.addControl(new LocationControl());
     L.tileLayer.provider('Stamen.Watercolor').addTo(map);
 });
