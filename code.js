@@ -192,8 +192,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 '<h3>' + art.name + '</h3>' +
                 ' <img width="150" class="popup-img" src="' + art.img_url + '" />' +
                 '<p>' + art.address + '</p>' +
-                '<a href=' + art.website + ' target="_blank" >website</a>' + '<a href="' +
-                'https://www.google.es/maps/dir/' + self_loc.lat + ',' + self_loc.lng + '/' + art.loc.lat + ',' + art.loc.lng + '" target="_blank">directions</a>');
+                '<a href=' + art.website + ' target="_blank" >website</a>' + '</break> <a href="' +
+                'https://www.google.es/maps/dir/?api=1&origin=' + self_loc.lat + ',' + self_loc.lng + '&destination=' + art.loc.lat + ',' + art.loc.lng + '&travelmode=bicycling" target="_blank">directions</a>');
         }
         console.log('working');
     }
@@ -211,20 +211,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
         self_loc = e.latlng;
         displayGalleryNearby(e.latlng);
-
-
     }
 
     function onLocationError(e) {
-        alert(e.message);
+        console.log(e.message);
     }
 
     map.on('locationfound', onLocationFound);
-    // map.on('locationerror', onLocationError);
+    map.on('locationerror', onLocationError);
 
     function locate() {
         map.locate({setView: true, maxZoom: 15, minZoom: 15});
     }
 
     locate();
+
+    L.tileLayer.provider('Stamen.Watercolor').addTo(map);
 });
