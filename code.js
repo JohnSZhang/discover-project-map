@@ -268,7 +268,7 @@ document.addEventListener("DOMContentLoaded", function () {
             var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom cursor');
 
             container.style.backgroundColor = 'white';
-            container.style.backgroundImage =   "url(https://freeiconshop.com/wp-content/uploads/edd/location-marker-flat.png)";
+            container.style.backgroundImage =   "url(http://freeiconshop.com/wp-content/uploads/edd/location-marker-flat.png)";
             container.style.backgroundSize = "35px 35px";
             container.style.width = '35px';
             container.style.height = '35px';
